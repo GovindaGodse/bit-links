@@ -48,6 +48,19 @@ body {
   transform: translateY(-1px);
 }
 
+.app-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1);
+  opacity: 0.8;
+  box-shadow: none;
+  transform: none;
+}
+
+.app-button:disabled:hover {
+  filter: grayscale(1);
+  transform: none;
+}
+
 @utility flex-centered {
   @apply flex justify-center items-center;
 }
