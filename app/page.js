@@ -21,7 +21,7 @@ export default function Home() {
             URL shortener
           </p>
           <div className="flex items-center gap-4 pt-2">
-            <Link href="/try">
+            <Link href="/generate">
               <button className="app-button px-6 py-3 rounded-xl font-semibold hover:cursor-pointer">
                 Try now
               </button>
