@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0f;
+  --foreground: #e5e7eb;
 }
 
 @theme inline {
@@ -12,10 +12,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ededed;
+    --foreground: #0a0a0a;
   }
 }
 
@@ -23,4 +23,31 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.app-navbar {
+  background: rgb(18 18 26 / 88%);
+  border-bottom: 1px solid rgb(99 102 241 / 20%);
+  backdrop-filter: blur(12px);
+}
+
+.app-link:hover {
+  color: #67e8f9;
+}
+
+.app-button {
+  background: linear-gradient(110deg, #4f46e5, #0891b2);
+  box-shadow: 0 0 24px rgb(99 102 241 / 18%);
+  transition:
+    filter 150ms ease,
+    transform 150ms ease;
+}
+
+.app-button:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+@utility flex-centered {
+  @apply flex justify-center items-center;
 }
