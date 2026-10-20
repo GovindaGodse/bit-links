@@ -30,10 +30,13 @@ export async function POST(request) {
     shortUrl = generateShortUrl();
   } while (await collection.findOne({ shortUrl }));
 
-  const result = await collection.insertOne({
+  await collection.insertOne({
     url: body.url,
     shortUrl,
   });
 
-  return Response.json(result);
+  return Response.json({
+    message: "Link created",
+    shortUrl,
+  });
 }
