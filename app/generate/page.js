@@ -5,6 +5,17 @@ import React, { useState } from "react";
 function Generate() {
   const [url, setUrl] = useState("");
   const [generatedShortURL, setGeneratedShortURL] = useState("");
+  const isValidUrl = (value) => {
+    try {
+      const parsedUrl = new URL(value.trim());
+      return (
+        ["http:", "https:"].includes(parsedUrl.protocol) &&
+        Boolean(parsedUrl.hostname)
+      );
+    } catch {
+      return false;
+    }
+  };
 
   const handleOnChange = (e) => {
     setUrl(e.target.value);
@@ -29,7 +40,7 @@ function Generate() {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        setGeneratedShortURL(result.shortUrl)
+        setGeneratedShortURL(result.shortUrl);
         setUrl("");
       })
       .catch((error) => console.error(error));
@@ -40,7 +51,7 @@ function Generate() {
       <h1 className="text-6xl font-bold">
         <span className="text-indigo-400">Bit</span> Links
       </h1>
-      <section className="flex-centered gap-8">
+      <section className="flex-centered gap-6">
         <input
           value={url}
           type="text"
@@ -53,11 +64,25 @@ function Generate() {
         <button
           className="app-button enabled:hover:cursor-pointer disabled:cursor-not-allowed px-4 py-2 rounded-full font-semibold"
           onClick={generate}
-          disabled={url.trim().length === 0}
+          disabled={!isValidUrl(url)}
         >
           Generate
         </button>
       </section>
+
+      <div className="flex-centered h-6 gap-2">
+        {generatedShortURL && (
+          <>
+            <p className="text-sm font-semibold tracking-wide text-slate-300">
+              Short url -
+            </p>
+            <a
+              className="font-medium text-indigo-400 underline decoration-indigo-400/50 underline-offset-4 transition-colors hover:text-cyan-300 hover:decoration-cyan-300 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+              href={`${process.env.NEXT_PUBLIC_HOST}/${generatedShortURL}`}
+            >{`${process.env.NEXT_PUBLIC_HOST}/${generatedShortURL}`}</a>
+          </>
+        )}
+      </div>
     </div>
   );
 }

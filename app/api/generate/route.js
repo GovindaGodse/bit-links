@@ -1,5 +1,15 @@
 import clientPromise from "@/lib/mongodb";
 
+function generateShortUrl() {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+
+  return Array.from(
+    { length: 6 },
+    () => characters[Math.floor(Math.random() * characters.length)],
+  ).join("");
+}
+
 export async function POST(request) {
   const body = await request.json();
 
@@ -15,7 +25,10 @@ export async function POST(request) {
     });
   }
 
-  const shortUrl = "Test";
+  let shortUrl;
+  do {
+    shortUrl = generateShortUrl();
+  } while (await collection.findOne({ shortUrl }));
 
   const result = await collection.insertOne({
     url: body.url,
