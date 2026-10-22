@@ -78,8 +78,8 @@ function Generate() {
             </p>
             <a
               className="font-medium text-indigo-400 underline decoration-indigo-400/50 underline-offset-4 transition-colors hover:text-cyan-300 hover:decoration-cyan-300 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
-              href={`${process.env.NEXT_PUBLIC_HOST}/${generatedShortURL}`}
-            >{`${process.env.NEXT_PUBLIC_HOST}/${generatedShortURL}`}</a>
+              href={`/${generatedShortURL}`}
+            >{`/${generatedShortURL}`}</a>
           </>
         )}
       </div>
