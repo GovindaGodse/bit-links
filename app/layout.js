@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Bitlinks - Shorten your links",
+  title: "Short links - Shorten your links",
   description: "Let you shorten your links",
+  icons: { icon: "/short-links-logo.svg" },
 };
 
 export default function RootLayout({ children }) {

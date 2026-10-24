@@ -49,7 +49,7 @@ function Generate() {
   return (
     <div className="flex-centered grow flex-col gap-10">
       <h1 className="text-6xl font-bold">
-        <span className="text-indigo-400">Bit</span> Links
+        SHORT LINKS
       </h1>
       <section className="flex-centered gap-6">
         <input

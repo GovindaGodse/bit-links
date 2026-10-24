@@ -1,6 +1,6 @@
 {
-  "name": "temp",
-  "version": "0.1.0",
+  "name": "short-links",
+  "version": "2026.10.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
