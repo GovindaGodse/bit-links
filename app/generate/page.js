@@ -1,10 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
-function Generate() {
+export default function Generate() {
   const [url, setUrl] = useState("");
   const [generatedShortURL, setGeneratedShortURL] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
+
   const isValidUrl = (value) => {
     try {
       const parsedUrl = new URL(value.trim());
@@ -17,74 +21,126 @@ function Generate() {
     }
   };
 
-  const handleOnChange = (e) => {
-    setUrl(e.target.value);
+  const generate = async (event) => {
+    event.preventDefault();
+    if (!isValidUrl(url) || isLoading) return;
+
+    setIsLoading(true);
+    setError("");
+    setGeneratedShortURL("");
+    setCopied(false);
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: url.trim() }),
+      });
+      if (!response.ok)
+        throw new Error("We couldn't create your link. Please try again.");
+      const result = await response.json();
+      if (!result.shortUrl)
+        throw new Error(
+          "The server didn't return a short link. Please try again.",
+        );
+      setGeneratedShortURL(result.shortUrl);
+      setUrl("");
+    } catch (requestError) {
+      setError(
+        requestError.message || "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const generate = () => {
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    const requestBody = JSON.stringify({
-      url,
-    });
-
-    const requestOptions = {
-      method: "POST",
-      headers: headers,
-      body: requestBody,
-      redirect: "follow",
-    };
-
-    fetch("/api/generate", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        setGeneratedShortURL(result.shortUrl);
-        setUrl("");
-      })
-      .catch((error) => console.error(error));
+  const copyLink = async () => {
+    const fullUrl = `${window.location.origin}/${generatedShortURL}`;
+    try {
+      await navigator.clipboard.writeText(fullUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setError("Couldn't access your clipboard. Select the link to copy it.");
+    }
   };
 
   return (
-    <div className="flex-centered grow flex-col gap-10">
-      <h1 className="text-6xl font-bold">
-        SHORT LINKS
-      </h1>
-      <section className="flex-centered gap-6">
-        <input
-          value={url}
-          type="text"
-          name="urlInput"
-          id="urlInput"
-          className="rounded-full border w-120 focus:outline-none focus:ring-0  border-transparent [background:linear-gradient(#0f172a,#0f172a)_padding-box,linear-gradient(to_right,#818cf8,#67e8f9)_border-box] px-4 py-2"
-          placeholder="Paste your URL"
-          onChange={handleOnChange}
-        />
-        <button
-          className="app-button enabled:hover:cursor-pointer disabled:cursor-not-allowed px-4 py-2 rounded-full font-semibold"
-          onClick={generate}
-          disabled={!isValidUrl(url)}
-        >
-          Generate
-        </button>
-      </section>
+    <main className="generate-main">
+      <section className="generator">
+        <header className="generator-heading">
+          <span className="eyebrow">The quick link maker</span>
+          <h1 className="generator-title">Shorten a link</h1>
+          <p className="generator-description">
+            Paste a long URL below. We’ll make it short, neat, and ready to
+            share.
+          </p>
+        </header>
 
-      <div className="flex-centered h-6 gap-2">
-        {generatedShortURL && (
-          <>
-            <p className="text-sm font-semibold tracking-wide text-slate-300">
-              Short url -
+        <form className="generator-card" onSubmit={generate}>
+          <label className="input-label" htmlFor="urlInput">
+            Long URL
+          </label>
+          <div className="input-row">
+            <input
+              value={url}
+              type="url"
+              name="urlInput"
+              id="urlInput"
+              className="url-input"
+              placeholder="https://example.com/your-very-long-link"
+              onChange={(event) => {
+                setUrl(event.target.value);
+                if (error) setError("");
+              }}
+              autoComplete="url"
+              required
+            />
+            <button
+              className="generate-button"
+              type="submit"
+              disabled={!isValidUrl(url) || isLoading}
+            >
+              {isLoading ? "Generating..." : "Shorten link"}
+            </button>
+          </div>
+          <p className="generator-hint">
+            Include https:// at the beginning of your URL.
+          </p>
+
+          <div
+            className={`result-expander${generatedShortURL ? " is-open" : ""}`}
+          >
+            <div className="result-expander-inner">
+              {generatedShortURL && (
+                <div className="result-card">
+                  <div>
+                    <p className="result-info">Your short link is ready</p>
+                    <a className="result-link" href={`/${generatedShortURL}`}>
+                      {`${window?.location.origin}/${generatedShortURL}`}
+                    </a>
+                  </div>
+                  <button
+                    className="copy-button"
+                    type="button"
+                    onClick={copyLink}
+                  >
+                    {copied ? "Copied" : "Copy link"}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {error && (
+            <p className="error-message" role="alert">
+              {error}
             </p>
-            <a
-              className="font-medium text-indigo-400 underline decoration-indigo-400/50 underline-offset-4 transition-colors hover:text-cyan-300 hover:decoration-cyan-300 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
-              href={`/${generatedShortURL}`}
-            >{`/${generatedShortURL}`}</a>
-          </>
-        )}
-      </div>
-    </div>
+          )}
+        </form>
+        <p className="privacy-note">
+          <span>✳</span> No account needed. Your link is ready in seconds.
+        </p>
+      </section>
+    </main>
   );
 }
-
-export default Generate;

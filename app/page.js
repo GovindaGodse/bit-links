@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex-centered flex-col gap-12 grow lg:flex-row">
+    <main className="flex-centered flex-col gap-12 grow lg:flex-row m-10">
       <section className="flex w-full max-w-xl flex-col items-start justify-center gap-5">
         <span className="eyebrow">A simpler way to share</span>
         <h1 className="hero-title">
@@ -20,14 +20,13 @@ export default function Home() {
           </Link>
           <Link
             href="https://github.com/GovindaGodse/bit-links"
-            className="tertiary-button"
+            className="tertiary-button flex-centered items-center gap-1"
             target="_blank"
             rel="noreferrer"
           >
-            Source Code
+            Source Code <span className="external-icon" aria-hidden="true" />
           </Link>
         </div>
-        <p className="hero-note">No account required</p>
       </section>
       <section className="w-full max-w-2xl overflow-hidden rounded-3xl border border-line">
         <Image

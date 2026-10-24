@@ -14,9 +14,9 @@
   </defs>
 
   <rect width="720" height="300" fill="#0d0e10"/>
-  <ellipse cx="360" cy="150" rx="320" ry="110" fill="url(#glow)"/>
+  <ellipse cx="360" cy="162" rx="320" ry="110" fill="url(#glow)"/>
 
-  <g opacity="0">
+  <g opacity="0" transform="translate(0 12)">
     <animate attributeName="opacity" dur="7s" repeatCount="indefinite" keyTimes="0;0.03;0.97;0.995;1" values="0;1;1;0;0"/>
 
     <!-- pill that physically shrinks -->
@@ -81,4 +81,10 @@
       21 CHARACTERS · 70% SHORTER
     </text>
   </g>
+
+  <!-- footer note (always visible) -->
+  <g stroke="#c4f06a" stroke-width="1.6" stroke-linecap="round" transform="translate(0 -196)">
+    <path d="M186 255.5V268.5M179.5 262H192.5M181.4 257.4L190.6 266.6M190.6 257.4L181.4 266.6"/>
+  </g>
+  <text x="204" y="70" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#7c7e84">No account needed. Your link is ready in seconds.</text>
 </svg>

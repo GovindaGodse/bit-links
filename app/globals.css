@@ -7,10 +7,12 @@
   --muted: #9299a4;
   --line: rgb(255 255 255 / 9%);
   --accent: #c7f36b;
+  --accent-border: rgb(199 243 107 / 30%);
   --accent-hover: #d5fa8d;
   --accent-foreground: #14190c;
   --subtle-foreground: #c4c8cf;
   --quiet-foreground: #777f89;
+  --container-background: #101214;
 }
 
 @theme inline {
@@ -19,6 +21,7 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-border: var(--accent-border);
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
   --color-subtle-foreground: var(--subtle-foreground);
@@ -44,6 +47,11 @@ body {
 
 .app-link {
   @apply transition-colors hover:text-accent;
+}
+
+.external-icon {
+  @apply size-3.5 bg-current;
+  mask: url("/external.svg") center / contain no-repeat;
 }
 
 .eyebrow {
@@ -76,6 +84,83 @@ body {
 
 .hero-note {
   @apply mt-1 text-xs text-quiet-foreground;
+}
+
+.generate-main {
+  display: flex;
+  flex-grow: 1;
+}
+
+.generator {
+  @apply w-[min(680px,100%)] m-auto;
+}
+
+.generator-heading {
+  @apply mb-8 text-center;
+}
+
+.generator-heading .eyebrow {
+  @apply justify-center;
+}
+
+.generator-title {
+  @apply my-4 text-[50px] font-[570];
+  margin-bottom: 10px;
+}
+
+.generator-description {
+  @apply m-0 text-sm text-[var(--muted)];
+}
+
+.generator-card {
+  @apply flex flex-col rounded-[9px] border border-[var(--line)] bg-[--container-background] p-[26px] shadow-[0_16px_42px_rgb(0_0_0_/_20%)];
+}
+
+.input-label {
+  @apply mb-[10px] block text-xs font-semibold text-[#d9dce1];
+}
+
+.input-row {
+  @apply flex gap-[10px];
+}
+
+.url-input {
+  @apply h-[49px] w-full rounded-lg border border-[#30363b] bg-[#0d0f11] px-[14px] text-[13px] text-[#f4f5f7] outline-none transition-[border-color] duration-150 placeholder:text-[#69717a] focus:border-[rgb(199_243_107_/_65%)];
+}
+
+.generate-button {
+  @apply min-w-[120px] shrink-0 cursor-pointer rounded-lg border-0 bg-[var(--accent)] px-[17px] text-[13px] font-bold text-[#14190c] transition duration-150 hover:-translate-y-px hover:bg-[#d5fa8d] disabled:cursor-not-allowed disabled:opacity-45;
+}
+
+.generator-hint {
+  @apply mb-0 mt-3 text-[11px] text-[#747c85];
+}
+
+.result-card {
+  @apply mt-[15px] flex items-center justify-between gap-[14px] rounded-[9px] border border-[rgb(199_243_107_/_24%)] bg-[rgb(199_243_107_/_5%)] p-4;
+}
+
+.privacy-note {
+  @apply mt-[23px] flex justify-center gap-2 text-[11px] text-[#7f8790];
+}
+.privacy-note span {
+  @apply text-[var(--accent)];
+}
+
+.result-link {
+  @apply text-sm font-semibold text-[var(--accent)];
+}
+
+.result-info {
+  @apply mb-[6px] mt-0 text-[10px] uppercase tracking-[0.11em] text-[#879185];
+}
+
+.copy-button {
+  @apply cursor-pointer rounded-md border border-accent-border bg-transparent px-[11px] py-2 text-[11px] text-[var(--accent)] hover:bg-[rgb(199_243_107_/_9%)];
+}
+
+.error-message {
+  @apply mt-[13px] mb-0 text-xs text-[#ff9c91];
 }
 
 @utility flex-centered {

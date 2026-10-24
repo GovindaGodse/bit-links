@@ -16,18 +16,27 @@ function Navbar() {
           />
           Short Links
         </h2>
-        <ul className="flex-centered gap-2 text-sm">
+        <ul className="flex-centered gap-4 text-sm">
           <Link href="/">
-            <li className="app-link transition-colors">Home</li>
+            <li className="app-link transition-colors mr-2">Home</li>
           </Link>
-          <Link href="/contact">
-            <li className="app-link transition-colors">Contact</li>
+          <Link
+            href="https://govindagodse.netlify.app"
+            target="_blank"
+            rel="noreferrer"
+            className="flex-centered gap-0.5 app-link transition-colors"
+          >
+            <li className="app-link transition-colors">Credits</li>
+            <span className="external-icon" />
           </Link>
           <Link
             target="_blank"
             href="https://github.com/GovindaGodse/bit-links"
+            rel="noreferrer"
+            className="flex-centered gap-0.5 app-link transition-colors"
           >
             <li className="app-link transition-colors">GitHub</li>
+            <span className="external-icon" />
           </Link>
         </ul>
       </nav>
