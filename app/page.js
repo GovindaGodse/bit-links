@@ -16,7 +16,7 @@ export default function Home() {
 
         <div className="hero-actions">
           <Link href="/generate" className="primary-button">
-            <button>Shorten a link</button>
+            Shorten a link
           </Link>
           <Link
             href="https://github.com/GovindaGodse/bit-links"
@@ -24,12 +24,12 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            <button>Source Code</button>
+            Source Code
           </Link>
         </div>
         <p className="hero-note">No account required</p>
       </section>
-      <section className="w-full max-w-2xl overflow-hidden rounded-3xl border border-[rgb(255_255_255_/_9%)]">
+      <section className="w-full max-w-2xl overflow-hidden rounded-3xl border border-line">
         <Image
           className="h-auto w-full"
           width={720}
