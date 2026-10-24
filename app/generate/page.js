@@ -138,7 +138,7 @@ export default function Generate() {
           )}
         </form>
         <p className="privacy-note">
-          <span>✳</span> No account needed. Your link is ready in seconds.
+          <span className="text-base font-extralight">*</span> No account needed. Your link is ready in seconds.
         </p>
       </section>
     </main>

@@ -141,7 +141,7 @@ body {
 }
 
 .privacy-note {
-  @apply mt-[23px] flex justify-center gap-2 text-[11px] text-[#7f8790];
+  @apply mt-[23px] flex justify-center gap-1.5 text-[11px] text-[#7f8790];
 }
 .privacy-note span {
   @apply text-[var(--accent)];
