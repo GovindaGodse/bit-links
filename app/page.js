@@ -4,36 +4,32 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex-centered flex-col gap-12 grow lg:flex-row">
-      <div className="flex w-full max-w-xl flex-col items-start justify-center gap-5">
-        <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-sm tracking-wide text-emerald-300">
-          FAST · PRIVATE · FREE
-        </span>
-        <h2 className="text-4xl font-bold md:text-5xl">
-          The best URL shortener in the{" "}
-          <span className="bg-gradient-to-r from-indigo-400 to-cyan-300 bg-clip-text text-transparent">
-            market.
-          </span>
-        </h2>
-        <p className="text-lg leading-8 text-gray-400">
-            We are the most straightfoward URL Shortener in the world. Most of
-            the url shorteners will track you or ask you to give your details
-            for login. We understand your needs and hence we have created this
-            URL shortener
+      <section className="flex w-full max-w-xl flex-col items-start justify-center gap-5">
+        <span className="eyebrow">A simpler way to share</span>
+        <h1 className="hero-title">
+          Make every character <span>count.</span>
+        </h1>
+        <p className="hero-description">
+          Make long URLs easier to share. Paste a link, get a shorter one, and
+          share it wherever you need.
         </p>
-        <div className="flex items-center gap-4 pt-2">
-          <Link href="/generate">
-            <button className="app-button px-6 py-3 rounded-xl font-semibold hover:cursor-pointer">
-              Try now
-            </button>
+
+        <div className="hero-actions">
+          <Link href="/generate" className="primary-button">
+            <button>Shorten a link</button>
           </Link>
-          <Link href="/github">
-            <button className="rounded-xl border border-indigo-400/40 px-6 py-3 font-semibold text-gray-200 transition-colors hover:bg-indigo-400/10 hover:cursor-pointer">
-              GitHub
-            </button>
+          <Link
+            href="https://github.com/GovindaGodse/bit-links"
+            className="tertiary-button"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <button>Source Code</button>
           </Link>
         </div>
-      </div>
-      <div className="w-full max-w-2xl overflow-hidden rounded-3xl border border-indigo-400/20">
+        <p className="hero-note">No account required</p>
+      </section>
+      <section className="w-full max-w-2xl overflow-hidden rounded-3xl border border-[rgb(255_255_255_/_9%)]">
         <Image
           className="h-auto w-full"
           width={720}
@@ -43,7 +39,7 @@ export default function Home() {
           priority
           draggable={false}
         />
-      </div>
+      </section>
     </main>
   );
 }
